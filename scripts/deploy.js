@@ -33,10 +33,10 @@ async function verify(contractAddress, args) {
             constructorArguments: args,
         });
     } catch (error) {
-        if (error.message.includes("Contract source code already verified")) {
+        if (error.message.toLowerCase().includes("already verified")) {
             console.log("Contract already verified");
         } else {
-            console.log(error.message);
+            console.log(error);
         }
     }
 }
