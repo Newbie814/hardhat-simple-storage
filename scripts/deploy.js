@@ -25,22 +25,23 @@ async function main() {
     console.log(`Updated value is: ${updatedValue}`);
 }
 
-async function verify(contractAddress, args) {
+const verify = async (contractAddress, args) => {
     console.log("Verifying contract...");
     try {
         await run("verify:verify", {
             address: contractAddress,
             constructorArguments: args,
         });
-    } catch (error) {
-        if (error.message.includes("Contract source code already verified")) {
-            console.log("Contract already verified");
+    } catch (e) {
+        if (e.message.toLowerCase().includes("already verified")) {
+            console.log("Already Verified!");
         } else {
-            console.log(error.message);
+            console.log(e);
         }
     }
-}
+};
 
+// main
 main()
     .then(() => process.exit(0))
     .catch((error) => {
